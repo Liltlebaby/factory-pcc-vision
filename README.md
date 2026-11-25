@@ -6,6 +6,22 @@ A monitoring system for a rubber processing line. The **Production Control Cente
 
 *The PCC dashboard in its built-in simulation mode. Select it to open the 60-second walkthrough (MP4, 2.2 MB). Every value comes from the simulator, not from the plant.*
 
+## Running at the factory (real data)
+
+These screenshots come from the production server on 25 November 2026. Camera rack counting and the final-pond presence check run on live CCTV. Stations without installed hardware still show simulated values and are labelled that way in the UI. Internal IP addresses are masked.
+
+![Vision Monitor, camera 09: the YOLO model detects a rack and counts it when it crosses the line. Rack #10,429 at 11:25:56, 95 racks this shift, 25 FPS camera, 4.9 FPS inference on CPU](docs/media/real-vision-camera09.png)
+
+*Camera 09 at the dryer infeed: rack detection box, counting line, live shift totals and system readiness. [Watch 30 seconds of live counting (MP4)](docs/media/real-vision-camera09.mp4)*
+
+![PCC rack station: 10,427 racks counted to date, hourly counts for the morning shift and the latest AI event with track ID and confidence](docs/media/real-pcc-rack-hourly.png)
+
+*The same counts in PCC: shift totals, an hourly chart and each counting event with its track ID and confidence.*
+
+![Vision Monitor, camera 11 at the final pond: the work-zone polygon, the people-in-zone timer with a five-minute threshold, and the PPE and magnet-inspection tasks](docs/media/real-vision-final-pond.png)
+
+*Camera 11 at the final pond: the AI watches a work zone and starts a timer when nobody has been in it. PPE and magnet-inspection models are set up as separate tasks on the same camera.*
+
 ## Production Control Center (`PCC/`)
 
 | Area | Details |
@@ -51,4 +67,4 @@ Open <http://localhost:3000>. To connect real services, copy `PCC/env.example` t
 
 ## About the data
 
-The screenshots and video come from PCC's simulation mode. IP addresses in the code and docs are examples. No production data, credentials, camera footage or trained model weights are included.
+The first walkthrough video and the station screenshots under "Production Control Center" come from PCC's simulation mode. The "Running at the factory" section shows the production system. No one is visible in those camera frames, and internal IP addresses are masked. IP addresses in the code and docs are examples. Credentials and trained model weights are not included.
