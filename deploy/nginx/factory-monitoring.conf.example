@@ -1,0 +1,38 @@
+# Put this behind your company's TLS certificate and DNS. Only Nginx should be
+# reachable from the LAN; Compose binds the application ports to 127.0.0.1.
+
+server {
+    listen 443 ssl http2;
+    server_name pcc.factory.example;
+
+    ssl_certificate /etc/nginx/certs/factory.crt;
+    ssl_certificate_key /etc/nginx/certs/factory.key;
+
+    location / {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
+
+server {
+    listen 443 ssl http2;
+    server_name vision.factory.example;
+
+    ssl_certificate /etc/nginx/certs/factory.crt;
+    ssl_certificate_key /etc/nginx/certs/factory.key;
+
+    location / {
+        proxy_pass http://127.0.0.1:8011;
+        proxy_http_version 1.1;
+        proxy_buffering off;
+        proxy_read_timeout 90s;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+    }
+}

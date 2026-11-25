@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "cameras": [
+    {
+      "camera_id": "camera-09",
+      "name": "Camera 09",
+      "station_id": "rack-infeed",
+      "location": "หอโรยยาง · ก่อนเข้าเตา · LINE-1",
+      "lifecycle": "active",
+      "tasks": [
+        {
+          "task_id": "rack-counting",
+          "name": "นับเก๊ะหอโรยยางก่อนเข้าเตา",
+          "task_type": "line_crossing_count",
+          "station_id": "rack-infeed",
+          "lifecycle": "active",
+          "output_metrics": [
+            "rack_count",
+            "active_tracks",
+            "last_event"
+          ],
+          "model_required": true
+        }
+      ]
+    },
+    {
+      "camera_id": "final-pond-cam-01",
+      "name": "บ่อสุดท้าย · กล้อง 11",
+      "station_id": "final-pond",
+      "location": "บ่อสุดท้าย · จุดตรวจแม่เหล็ก · DVR 192.168.1.64 ช่อง 11",
+      "lifecycle": "planned",
+      "tasks": [
+        {
+          "task_id": "work-area-presence",
+          "name": "เฝ้าพื้นที่ทำงานบ่อสุดท้าย · ไม่มีคนเกิน 5 นาที",
+          "task_type": "area_presence",
+          "station_id": "final-pond",
+          "lifecycle": "planned",
+          "output_metrics": [
+            "presence_status",
+            "seconds_since_person",
+            "unattended_alerts",
+            "workers_in_zone",
+            "people_count",
+            "filtered_out"
+          ],
+          "model_required": true
+        },
+        {
+          "task_id": "ppe-helmet",
+          "name": "ตรวจหมวกนิรภัยของคนงานตลอดเวลา",
+          "task_type": "ppe_compliance",
+          "station_id": "final-pond",
+          "lifecycle": "planned",
+          "output_metrics": [
+            "people_count",
+            "helmet_pass",
+            "no_helmet",
+            "violation_count",
+            "assessment_status"
+          ],
+          "model_required": true
+        },
+        {
+          "task_id": "magnet-inspection",
+          "name": "รอบตรวจแม่เหล็กรายชั่วโมง",
+          "task_type": "hourly_inspection",
+          "station_id": "final-pond",
+          "lifecycle": "planned",
+          "output_metrics": [
+            "round_key",
+            "round_status",
+            "last_checked_at",
+            "last_weight_kg",
+            "awaiting_weight"
+          ],
+          "model_required": false
+        }
+      ]
+    }
+  ]
+}

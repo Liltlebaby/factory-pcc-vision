@@ -1,0 +1,6 @@
+ultralytics>=8.4,<9
+opencv-python>=4.10,<5
+lap>=0.5.12
+fastapi>=0.115,<1
+uvicorn[standard]>=0.34,<1
+python-dotenv>=1,<2

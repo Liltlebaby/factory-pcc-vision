@@ -1,0 +1,11 @@
+# Production runtime is pinned for repeatable server builds.
+# Ultralytics matches the Colab runtime used to validate the current model.
+ultralytics==8.4.150
+opencv-python==4.14.0.94
+lap==0.5.13
+fastapi==0.141.1
+uvicorn[standard]==0.52.4
+python-dotenv==1.2.3
+# Final-pond person detector runs as an OpenVINO export (models/pretrained/yolo11s_openvino_model).
+# Without it start_camera09.ps1 falls back to best_PEE_V1. Same version as the server since 2026-10-05.
+openvino==2026.4.1

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#09111f">
+  <title>Vision Monitor · Factory AI Cameras</title>
+  <link rel="stylesheet" href="/monitor.css?v=11">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Vision Monitor home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span><strong>VISION MONITOR</strong><small>AI Camera Operations</small></span></a>
+      <nav class="primary-nav" aria-label="เมนูหลัก"><a class="active" href="#overview">ภาพรวม</a><a href="#count-report">ยอดนับ</a><a href="#camera-09">กล้องทั้งหมด</a><a href="#ai-modules">งาน AI</a></nav>
+      <div class="topbar-actions"><a class="pcc-link" id="pcc-link" href="http://localhost:3000">เปิด PCC <span aria-hidden="true">↗</span></a><span class="status-pill waiting" id="connection" role="status"><i></i><span>กำลังเชื่อมต่อ</span></span><span class="live-clock" id="clock">--:--:--</span></div>
+    </header>
+
+    <main id="overview">
+      <section class="fleet-summary" aria-label="สรุประบบกล้อง">
+        <article><span>กล้องทั้งหมด</span><strong id="fleet-total">—</strong><small id="fleet-lifecycle">กำลังโหลด Registry</small></article>
+        <article><span>ออนไลน์</span><strong id="fleet-online">—</strong><small>สัญญาณและ AI พร้อมทำงาน</small></article>
+        <article><span>งาน AI</span><strong id="fleet-tasks">—</strong><small>Active และ Planned</small></article>
+        <article><span>เหตุการณ์ล่าสุด</span><strong id="fleet-last-event">—</strong><small>จากทุกกล้องในระบบ</small></article>
+      </section>
+
+      <section class="overview-grid" id="camera-09" aria-label="Camera 09 ระบบนับเก๊ะ">
+        <article class="camera-card panel">
+          <div class="panel-header"><div><p class="section-kicker">LIVE VIEW</p><h2><span id="active-camera-name">Camera 09</span> <span class="muted-title" id="active-camera-location"></span></h2></div><div class="camera-tools"><span class="camera-purpose" id="active-task-name">RACK COUNTING</span><button class="fullscreen-button" id="refresh" type="button"><span aria-hidden="true">↻</span> รีเฟรช</button><button class="fullscreen-button" id="fullscreen" type="button" aria-label="แสดงภาพกล้องเต็มจอ"><span aria-hidden="true">⛶</span> เต็มจอ</button></div></div>
+          <div class="video-stage" id="video-stage"><div class="video-placeholder" id="video-placeholder"><span class="placeholder-icon" aria-hidden="true">◉</span><strong id="video-waiting-title">กำลังรอภาพจาก Camera 09</strong><small>ระบบจะเชื่อมต่อใหม่โดยอัตโนมัติ</small></div><img id="video" alt="ภาพสด Camera 09 พร้อมกรอบตรวจจับเก๊ะ"><div class="video-status"><span class="mini-badge" id="camera-state">CAMERA —</span><span class="mini-badge" id="ai-state">AI —</span></div><div class="video-label"><i></i> <span id="video-camera-label">Camera 09</span></div></div>
+          <p class="inline-alert" id="message" role="status" aria-live="polite"></p>
+        </article>
+
+        <aside class="summary-column">
+          <article class="count-card panel"><div class="count-label"><span>จำนวนเก๊ะ</span><span class="period-label">ยอดสะสมของบริการ</span></div><div class="count-row"><strong class="count" id="count">—</strong><span class="count-unit">เก๊ะ</span></div><div class="last-event"><span>เหตุการณ์ล่าสุด</span><strong id="last-event">ยังไม่มีข้อมูล</strong></div></article>
+          <article class="metrics-grid panel" aria-label="ประสิทธิภาพระบบ"><div class="metric"><span>Camera FPS</span><strong><b id="camera">—</b> FPS</strong></div><div class="metric"><span>Inference FPS</span><strong><b id="inference">—</b> FPS</strong></div><div class="metric"><span>กำลังติดตาม</span><strong><b id="tracks">—</b> เก๊ะ</strong></div><div class="metric metric-wide"><span>ไฟล์โมเดลที่ใช้งาน</span><strong id="model">กำลังโหลด</strong></div></article>
+          <article class="runtime-status panel"><div class="runtime-heading"><div><p class="section-kicker">SERVICE HEALTH</p><h2>ความพร้อมใช้งาน</h2></div><button class="reset-button" id="reset-count" type="button">รีเซ็ตจำนวน</button></div><ul class="health-list"><li><span><i id="health-camera"></i>Camera stream</span><strong id="health-camera-text">กำลังตรวจสอบ</strong></li><li><span><i id="health-ai"></i>AI detector</span><strong id="health-ai-text">กำลังตรวจสอบ</strong></li></ul></article>
+        </aside>
+      </section>
+
+      <section class="count-report panel" id="count-report" aria-label="ยอดนับเก๊ะรายชั่วโมงและรายกะ">
+        <div class="operations-heading">
+          <div><p class="section-kicker">RACK COUNT</p><h2>ยอดนับเก๊ะ</h2><p>แยกรายชั่วโมงและรายกะ นับจากเหตุการณ์ที่บันทึกไว้จริง</p></div>
+          <div class="count-toolbar">
+            <button id="count-prev" type="button" aria-label="วันก่อนหน้า">‹</button>
+            <span class="count-date"><strong id="count-date-label">—</strong><input id="count-date-input" type="date" aria-label="เลือกวันที่"></span>
+            <button id="count-next" type="button" aria-label="วันถัดไป">›</button>
+            <button id="count-today" type="button">วันนี้</button>
+          </div>
+        </div>
+        <p class="count-error" id="count-error" role="status" aria-live="polite"></p>
+        <div class="shift-row" id="count-shifts"></div>
+        <div class="hour-chart-head">
+          <h3>รายชั่วโมง</h3>
+          <div class="hour-legend">
+            <span><i style="background:#54a8ff"></i>กะเช้า</span>
+            <span><i style="background:#ffbd4a"></i>นอกกะ</span>
+            <span><i style="background:#8b5cf6"></i>กะดึก</span>
+            <span><i style="background:#21364d"></i>ยังไม่ถึงเวลา</span>
+          </div>
+        </div>
+        <div class="hour-chart" id="count-hours"></div>
+      </section>
+
+      <section class="operations-grid" id="ai-modules">
+        <div class="station-context" id="station-context" hidden><div><small>PCC STATION CONTEXT</small><strong></strong></div><span></span></div>
+        <article class="fleet-panel panel"><div class="operations-heading"><div><h2>Camera Fleet</h2><p>กล้องและงาน AI ที่ลงทะเบียนในระบบ</p></div><span id="fleet-count-label">— กล้อง</span></div><div class="table-scroll"><table><thead><tr><th>ชื่อกล้อง</th><th>งาน AI</th><th>สถานะ</th><th>ตำแหน่งติดตั้ง</th></tr></thead><tbody id="camera-fleet-body"><tr><td colspan="4" class="loading-cell">กำลังโหลด Camera Registry</td></tr></tbody></table></div></article>
+        <article class="task-panel panel"><div class="operations-heading"><div><h2>AI Task Catalog</h2><p>โมเดลและกฎตรวจจับแยกตามงาน</p></div><span id="task-count-label">— งาน</span></div><div class="task-list" id="task-list"><p class="loading-cell">กำลังโหลด AI Tasks</p></div></article>
+      </section>
+
+      <section class="architecture panel" aria-label="Service Architecture">
+        <div class="architecture-title"><h2>Service Architecture</h2><p>ส่งเฉพาะข้อมูลผลลัพธ์ไปยัง PCC</p></div>
+        <div class="architecture-flow"><div class="architecture-node"><b>01</b><span><strong>CCTV</strong><small>ภาพจากสายการผลิต</small></span></div><i>→</i><div class="architecture-node"><b>02</b><span><strong>AI Model</strong><small>Inference บน Server</small></span></div><i>→</i><div class="architecture-node"><b>03</b><span><strong>Event API</strong><small>จำนวน · สถานะ · เหตุการณ์</small></span></div><i>→</i><div class="architecture-node"><b>04</b><span><strong>PCC</strong><small>แสดงผลตามจุดโรงงาน</small></span></div><div class="no-video"><span aria-hidden="true">⊘</span><strong>ไม่ส่งวิดีโอไปยัง PCC</strong></div></div>
+      </section>
+
+      <details class="connection-settings"><summary>ตั้งค่าการเชื่อมต่อ API</summary><form id="connect"><label for="token">API token <span>(หากมี)</span></label><div class="inline-field"><input id="token" type="password" autocomplete="off" placeholder="วาง token ที่นี่"><button class="button secondary" type="submit">เชื่อมต่อใหม่</button></div></form></details>
+    </main>
+    <footer><span>Vision Monitor · Factory AI Cameras</span><span>เชื่อมต่อ Production Control Center ผ่าน API</span></footer>
+  </div>
+  <div class="toast" id="action-message" role="status" aria-live="polite"></div>
+  <script src="/monitor.js?v=11" defer></script>
+  <script src="/counting.js?v=11" defer></script>
+</body>
+</html>

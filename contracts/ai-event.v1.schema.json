@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://factory.local/contracts/ai-event.v1.schema.json",
+  "title": "AI Event v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "camera_id",
+    "task_id",
+    "station_id",
+    "type",
+    "occurred_at",
+    "model_version",
+    "rule_version",
+    "payload"
+  ],
+  "properties": {
+    "cursor": { "type": "integer", "minimum": 1 },
+    "event_id": { "type": "string", "minLength": 1, "maxLength": 160 },
+    "camera_id": { "type": "string", "pattern": "^[A-Za-z0-9_-]{1,100}$" },
+    "task_id": { "type": "string", "pattern": "^[A-Za-z0-9_-]{1,100}$" },
+    "station_id": { "type": "string", "pattern": "^[A-Za-z0-9_-]{1,100}$" },
+    "type": { "type": "string", "pattern": "^[A-Za-z0-9_.:-]{1,100}$" },
+    "occurred_at": { "type": "string", "format": "date-time" },
+    "model_version": { "type": ["string", "null"], "maxLength": 160 },
+    "rule_version": { "type": "string", "minLength": 1, "maxLength": 100 },
+    "payload": { "type": "object" }
+  }
+}

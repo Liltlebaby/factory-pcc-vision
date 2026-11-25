@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://factory.local/contracts/sensor-telemetry.v1.schema.json",
+  "title": "Sensor Telemetry v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "measurement_id",
+    "site_id",
+    "line_id",
+    "station_id",
+    "device_id",
+    "metric",
+    "value",
+    "unit",
+    "measured_at",
+    "received_at",
+    "quality",
+    "source_mode"
+  ],
+  "properties": {
+    "measurement_id": { "type": "string", "minLength": 1, "maxLength": 160 },
+    "site_id": { "type": "string", "pattern": "^[A-Za-z0-9_-]{1,100}$" },
+    "line_id": { "type": "string", "pattern": "^[A-Za-z0-9_-]{1,100}$" },
+    "station_id": { "type": "string", "pattern": "^[A-Za-z0-9_-]{1,100}$" },
+    "device_id": { "type": "string", "pattern": "^[A-Za-z0-9_-]{1,100}$" },
+    "metric": { "type": "string", "pattern": "^[A-Za-z0-9_.:-]{1,100}$" },
+    "value": { "type": "number" },
+    "unit": { "type": "string", "minLength": 1, "maxLength": 40 },
+    "measured_at": { "type": "string", "format": "date-time" },
+    "received_at": { "type": "string", "format": "date-time" },
+    "quality": { "enum": ["good", "uncertain", "bad", "stale"] },
+    "source_mode": { "enum": ["live", "demo"] }
+  }
+}

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0B0E12">
+  <title>Vision Monitor · กล้อง AI โรงงาน</title>
+  <!-- ถ้าเครื่องไม่มีอินเทอร์เน็ต ฟอนต์นี้โหลดไม่ได้ แล้วจะใช้ Leelawadee UI / Tahoma แทนเอง -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@500;600;700&amp;family=IBM+Plex+Sans+Thai:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap">
+  <link rel="stylesheet" href="/monitor.css?v=24">
+</head>
+<body>
+  <div class="app">
+    <aside class="side" aria-label="เมนู">
+      <a class="brand" href="#/" aria-label="Vision Monitor หน้าภาพรวม">
+        <span class="brand-mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg></span>
+        <span><b>VISION MONITOR</b><small>ระบบกล้อง AI · PCC</small></span>
+      </a>
+      <nav class="nav-group" aria-label="ภาพรวม">
+        <div class="nav-title">ภาพรวม</div>
+        <a class="nav-link" data-route="overview" href="#/">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg>
+          <span>ภาพรวมทุกกล้อง</span>
+        </a>
+      </nav>
+      <nav class="nav-group" aria-label="กล้องตามหมวด">
+        <div class="nav-title">กล้องตามหมวด</div>
+        <div id="nav-cameras" style="display:contents"></div>
+      </nav>
+      <nav class="nav-group" aria-label="ระบบ">
+        <div class="nav-title">ระบบ</div>
+        <a class="nav-link" href="/dataset">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"></path></svg>
+          <span>ชุดข้อมูลและเทรนโมเดล</span>
+        </a>
+        <a class="nav-link" id="pcc-link" href="http://192.168.1.50:3000">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 4h6v6"></path><path d="M20 4l-9 9"></path><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg>
+          <span>เปิด PCC</span>
+        </a>
+      </nav>
+      <div class="side-foot">
+        <div class="server-card">
+          <div class="state" id="connection" role="status"><i class="dot"></i><span>กำลังเชื่อมต่อ</span></div>
+          <small>เวลา <span class="mono" id="clock">--:--:--</span></small>
+        </div>
+        <details class="settings">
+          <summary>ตั้งค่าการเชื่อมต่อ API</summary>
+          <form id="connect">
+            <label for="token">API token (ถ้ามี)</label>
+            <input id="token" type="password" autocomplete="off" placeholder="วาง token ที่นี่">
+            <button class="btn sm" type="submit">เชื่อมต่อใหม่</button>
+          </form>
+        </details>
+      </div>
+    </aside>
+
+    <main class="main" id="view" aria-live="off"></main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="/counting.js?v=21" defer></script>
+  <script src="/monitor.js?v=32" defer></script>
+</body>
+</html>
